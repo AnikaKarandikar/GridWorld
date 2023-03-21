@@ -46,14 +46,13 @@ public class SpiralBug extends Bug
         {
             move();
             steps++;
-            sideLength--;
         }
         else
         {
             turn();
-            //turn();
-            sideLength--;
+            turn();
             steps = 0;
+            sideLength++;
         }
     }
 }

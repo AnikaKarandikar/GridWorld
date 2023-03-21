@@ -30,6 +30,11 @@ public class ZBug extends Bug
     private int turnSteps;
     private boolean isTurn;
 
+
+    private boolean stretch1 = true;
+    private boolean turn = false;
+    private boolean stretch2 = false;
+
     /**
      * Constructs a box bug that traces a square of a given side length
      * @param length the side length
@@ -49,7 +54,7 @@ public class ZBug extends Bug
     public void act()
     {
         
-       if(!isTurn)
+       if(stretch1)
        {
        
         if (steps < sideLength && canMove())
@@ -57,31 +62,42 @@ public class ZBug extends Bug
 			move();
 			steps++;
 		}
-		else if(steps == sideLength) isTurn = true;
-		else if(steps2 < sideLength && canMove())
-		{
-			move();
-			steps++;
-		}
-	  }
-	  else
-	  {
-		  if(turnSteps==0)
-		  {
-			 turn();
-			 turnSteps++; 
-		  }
-		  if(turnSteps<sideLength+1 && canMove())
-		  {
-		     move(); 
-		     turnSteps++; 
-	      }
-	      else 
-	      {
-			  isTurn = false;
-			  setDirection(getDirection() +135);
-		  }
-	  }
+        else
+        {
+            stretch1 = false;
+            turn = true;
+            turn();
+        }
+       }
+       else if(turn)
+       {
+            if(turnSteps<sideLength && canMove())
+            {
+                move(); 
+                turnSteps++; 
+            }
+            else 
+            {
+                setDirection(getDirection() +135);
+                turn = false;
+                stretch2 = true;
+                //System.out.println(isTurn + "");
+            }
+       }
+       else if(stretch2)
+       {
+            if(steps2 < sideLength && canMove())
+            {
+                move();
+                steps2++;
+            }
+            else 
+            {
+                stretch2 = false;
+            }
+
+       }
+
     }
     
     /**

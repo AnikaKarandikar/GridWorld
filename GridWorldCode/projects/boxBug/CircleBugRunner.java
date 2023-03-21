@@ -18,6 +18,7 @@
 
 import info.gridworld.actor.ActorWorld;
 import info.gridworld.grid.Location;
+import info.gridworld.grid.UnboundedGrid;
 
 import java.awt.Color;
 
@@ -29,7 +30,8 @@ public class CircleBugRunner
 {
     public static void main(String[] args)
     {
-        ActorWorld world = new ActorWorld();
+        UnboundedGrid grid = new UnboundedGrid<>(); 
+        ActorWorld world = new ActorWorld(grid);
         CircleBug alice = new CircleBug(6);
         alice.setColor(Color.ORANGE);
         CircleBug bob = new CircleBug(3);
